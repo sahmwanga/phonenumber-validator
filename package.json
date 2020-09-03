@@ -1,6 +1,6 @@
 {
   "name": "bl-phonenumber-validator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Library used for mobile number validation",
   "main": "index.js",
   "scripts": {
