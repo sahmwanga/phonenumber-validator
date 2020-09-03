@@ -1,0 +1,27 @@
+{
+  "name": "bl-phonenumber-validator",
+  "version": "1.0.6",
+  "description": "Library used for mobile number validation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "jest"
+  },
+  "keywords": [
+    "validation",
+    "bongolive",
+    "contact validation"
+  ],
+  "author": {
+    "email": "sahmwanga@gmail.com",
+    "url": "",
+    "name": "Salehe Mwanga"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "libphonenumber-js": "1.7.56"
+  },
+  "devDependencies": {
+    "jest": "26.4.0"
+  }
+}
