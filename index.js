@@ -8,21 +8,24 @@ const { parsePhoneNumberFromString } = require('libphonenumber-js');
  */
 
 exports.trimMsisdn = (msisdn) => {
-  msisdn = msisdn
-    .toString()
-    .toString()
-    .replace(/\s+/g, '')
-    .replace(/\-/g, '')
-    .replace(/\^/g, '')
-    .replace(/\_/g, '')
-    .replace(/[#_+-]/g, '')
-    .replace(/[{()}]/g, '');
+  try {
+    msisdn = msisdn
+      .toString()
+      .replace(/\s+/g, '')
+      .replace(/\-/g, '')
+      .replace(/\^/g, '')
+      .replace(/\_/g, '')
+      .replace(/[#_+-]/g, '')
+      .replace(/[{()}]/g, '');
 
-  msisdn = msisdn.toString().match(/^\+/) ? msisdn : '+' + msisdn;
-  const PhoneNumber = parsePhoneNumberFromString(msisdn);
+    msisdn = msisdn.toString().match(/^\+/) ? msisdn : '+' + msisdn;
+    const PhoneNumber = parsePhoneNumberFromString(msisdn);
 
-  if (PhoneNumber) {
-    return PhoneNumber.number.replace(/[#_+-]/g, '');
+    if (PhoneNumber) {
+      return PhoneNumber.number.replace(/[#_+-]/g, '');
+    }
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -32,16 +35,18 @@ exports.trimMsisdn = (msisdn) => {
  * @returns {boolean} true|false
  */
 exports.isValidMsisdn = (msisdn) => {
-  msisdn = msisdn.toString();
-
-  try {
+  if (msisdn) {
+    msisdn = msisdn.toString();
     const phoneObj = parsePhoneNumberFromString(
       msisdn.match(/^\+/) ? msisdn : '+' + msisdn
     );
-    return phoneObj.isValid();
-  } catch (err) {
+    if (phoneObj) {
+      if (phoneObj.isValid()) return phoneObj.isValid();
+      return false;
+    }
     return false;
   }
+  return false;
 };
 
 /**
