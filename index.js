@@ -37,6 +37,12 @@ exports.trimMsisdn = (msisdn) => {
 exports.isValidMsisdn = (msisdn) => {
   if (msisdn) {
     msisdn = msisdn.toString();
+
+    // this validation is specifically to new airtel number;
+    if(msisdn.startsWith(25530) && msisdn.length==15){
+      return true;
+    }
+    
     const phoneObj = parsePhoneNumberFromString(
       msisdn.match(/^\+/) ? msisdn : '+' + msisdn
     );
